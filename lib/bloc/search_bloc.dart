@@ -23,7 +23,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final TextEditingController textEditingController = TextEditingController();
 
   String get text => textEditingController.text;
-  Timer? _debounceTimer;
 
   Future<void> _openGoogleMapEvent(
       OpenGoogleMapEvent event, Emitter<SearchState> emit) async {
@@ -61,7 +60,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   @override
   Future<void> close() {
     textEditingController.dispose();
-    _debounceTimer?.cancel();
     return super.close();
   }
 }
