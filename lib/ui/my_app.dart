@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_1/bloc/search_bloc.dart';
 import 'package:test_1/di/app_module.dart';
 import 'package:test_1/theme/typography.dart';
@@ -47,26 +46,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-            child: BlocListener<SearchBloc, SearchState>(
-      bloc: _bloc,
-      listenWhen: (previous, current) => current is SearchError,
-      listener: (context, state) {
-        if (state is SearchError) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-              content: Text(state.message),
-            ));
-        }
-      },
-      child: Container(
-          padding: const EdgeInsets.all(30.0),
-          child: Column(
-            children: [
-              SearchView(_bloc),
-              ListResult(_bloc),
-            ],
-          )),
+            child: Container(
+      padding: const EdgeInsets.all(30.0),
+      child: Column(
+        children: [
+          SearchView(_bloc),
+          ListResult(_bloc),
+        ],
+      ),
     )));
   }
 }
